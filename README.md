@@ -22,8 +22,8 @@
     - Board MVC Create
     - 생성한 MVC Package 설정(@ComponentScan 내부스캔으로 Service와 Controller설정,@MapperScan Mapper설정 )
     - 게시판 글 생성 및 수정 삭제 구현
-    
-<img src="https://raw.githubusercontent.com/ldj8196/basic-html-2023/main/image/Day01.png" width="300">
+<br/>
+<img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/boardimage.png" width="500" height="500">
 
 <br/>
 
@@ -33,7 +33,7 @@
     - ItemImage(물품사진) 이미지 등록 및 삭제
     - 물품등록사진 전체 조회
 
-<img src="https://raw.githubusercontent.com/ldj8196/basic-html-2023/main/image/Day01.png" width="300">
+<img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/imageone.png" width="300">
 <br/>
 
 ## 2023.05.02
@@ -41,5 +41,5 @@
     - 물품 일괄등록 구현
     - 물품 일괄삭제 구현
     - 물품 일괄수정 구현
-<img src="https://raw.githubusercontent.com/ldj8196/basic-html-2023/main/image/Day01.png" width="300">
+<img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/itembatch.png" width="300">
 <br/>
