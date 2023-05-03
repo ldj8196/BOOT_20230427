@@ -14,6 +14,14 @@
     <update id="updateMemberOne" parameterType="com.example.boot_20230427.dto.Member">
         UPDATE member SET name=#{name}, age=#{age} WHERE id=#{id} AND password=#{password}
     </update>
+    
+    <update id="updateMemberpassword" parameterType="com.example.boot_20230427.dto.Member">
+        UPDATE member SET password=#{newpassword} WHERE id=#{id} AND password=#{password}
+    </update>
+
+    <select id="selectMemberOne1" parameterType="string" resultType="com.example.boot_20230427.dto.Member">
+        SELECT * FROM member WHERE id=#{id}
+    </select>
 
     <update id="deleteMemberOne" parameterType="com.example.boot_20230427.dto.Member">
         UPDATE member SET password=null, name=null, age=0, role=null, regdate=null WHERE id=#{id} AND password=#{password}

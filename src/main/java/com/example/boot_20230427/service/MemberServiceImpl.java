@@ -49,5 +49,23 @@ public class MemberServiceImpl implements MemberService {
             return 0;
         }
     }
+
+    @Override
+    public Member selectMemberOne1(String id) {
+        try {
+            return mMapper.selectMemberOne1(id);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public int updateMemberpassword(Member member) {
+        try {
+            return mMapper.updateMemberpassword(member);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
     
 }

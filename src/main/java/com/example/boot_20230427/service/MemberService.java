@@ -10,4 +10,6 @@ public interface MemberService {
     public Member selectMemberOne(Member member);
     public int updateMemberOne(Member member);
     public int deleteMemberOne(Member member);
+    public Member selectMemberOne1(String id);
+    public int updateMemberpassword(Member member);
 }

@@ -21,5 +21,6 @@ public class Member {
 	private int age;
 	private Date userdate;
 	private String role; // 고객 customer, 판매자 seller
+	private String newpassword;
 
 }

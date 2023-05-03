@@ -6,15 +6,19 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.boot_20230427.dto.Item;
+import com.example.boot_20230427.dto.Member;
 import com.example.boot_20230427.service.ItemService;
+import com.example.boot_20230427.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +32,25 @@ public class SellerController {
     
     @Autowired ItemService iService;
     final HttpSession httpSession;
+    final String format = "SellerController => {}";
+    final MemberService mService;
+
+    @GetMapping(value = "/join.do")
+    public String joinGET() {
+        return "/seller/join";
+    }
+    @PostMapping(value = "join.do")
+    public String joinPOST(@ModelAttribute Member member) {
+        log.info(format, member);
+        
+        BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder(); // salt값을 자동으로 부여함.
+        member.setPassword(bcpe.encode(member.getPassword())); // 기존 암호를 암호화 시켜서 다시 저장함
+        int ret = mService.memberJoin(member);
+        if(ret == 1) {
+            return "redirect:joinok.do";
+        }
+        return "redirect:join.do"; // 주소창에 127.0.0.1:9090/ROOT/customer/join.do 엔터키 자동화
+    }
 
     @GetMapping(value = "/home.do")
     public String homeGET(@RequestParam(name = "menu",defaultValue = "0",required = false) int menu, Model model) {

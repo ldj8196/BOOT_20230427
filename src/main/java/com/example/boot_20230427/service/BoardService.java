@@ -24,4 +24,5 @@ public interface BoardService {
 
     // 게시글 하나 삭제
     public int deleteBoardOne(@Param("no") long no);
+
 }

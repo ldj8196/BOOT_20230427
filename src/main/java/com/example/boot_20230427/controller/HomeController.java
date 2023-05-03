@@ -1,5 +1,7 @@
 package com.example.boot_20230427.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,10 +9,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
     
+
+
+
+    @GetMapping(value = "/login.do")
+    public String loginGET() {
+        return "login";
+    }
+
     // 자동 임포트 shift + alt + o
     // 주소 url 작성(127.0.0.1:9090/CONTEXTPATH/home.do)
     @GetMapping(value = {"/home.do","/"})
-    public String homeGET(Model model) {
+    public String homeGET(Model model, @AuthenticationPrincipal User user) {
+        if(user != null) { //로그인 되었음
+            System.out.println(user.toString());
+        }
+        model.addAttribute("user", user);
         model.addAttribute("title", "전송된타이틀");
         model.addAttribute("abc", "마음대로");
         // templates / home.html 실행
@@ -23,6 +37,11 @@ public class HomeController {
     public String mainGET(){
 
         return "main";
+    }
+    // 403 page 생성
+    @GetMapping(value = "/403page.do")
+    public String errorpageGET() {
+        return "403page";
     }
 
 

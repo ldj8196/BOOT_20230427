@@ -43,3 +43,7 @@
     - 물품 일괄수정 구현
 <img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/itembatch.png" width="300">
 <br/>
+
+## 2023.05.03
+  - Spring Boot SecurityFilterChain
+    - 고객, 판매자, 관리자 권한을 이용하여 SecurityFilter 학습

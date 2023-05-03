@@ -18,5 +18,11 @@ public interface MemberMapper {
 
     // 회원탈퇴
     public int deleteMemberOne(Member member);
+
+    // 멤버 로그인 아이디
+    public Member selectMemberOne1(String userid);
+
+    // 멤버 비밀번호 변경
+    public int updateMemberpassword(Member member);
     
 }
