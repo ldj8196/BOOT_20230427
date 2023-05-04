@@ -12,6 +12,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+@Component
 public class JwUtil {
      // 토큰 생성용 보안키
      private final String SECRETKEY = "gyuf6r567546sd546e56";
