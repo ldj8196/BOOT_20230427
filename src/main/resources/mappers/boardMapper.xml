@@ -5,7 +5,12 @@
     <update id="updateBoardOne" parameterType="com.example.boot_20230427.dto.Board">
         UPDATE BOARD SET title=#{title}, content=#{content}, writer=#{writer} WHERE no=#{no}
     </update>
+
     <delete id="deleteBoardOne" parameterType="long">
         DELETE FROM BOARD WHERE no=#{no}
     </delete>
+
+    <update id="updatehitBoard" parameterType="com.example.boot_20230427.dto.Board">
+        UPDATE BOARD SET hit= #{hit} + 1 WHERE no=#{no}
+    </update>
 </mapper>

@@ -24,5 +24,8 @@ public interface BoardService {
 
     // 게시글 하나 삭제
     public int deleteBoardOne(@Param("no") long no);
+    
+    // 게시글 조회수 업데이트
+    public int updatehitBoard(@Param("obj") Board board);
 
 }

@@ -68,5 +68,14 @@ public class BoardServiceImpl implements BoardService {
         }
     }
 
+    @Override
+    public int updatehitBoard(Board board) {
+        try {
+            return bMapper.updatehitBoard(board);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
     
 }

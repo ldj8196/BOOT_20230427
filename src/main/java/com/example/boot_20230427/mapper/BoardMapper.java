@@ -35,4 +35,6 @@ public interface BoardMapper {
     public int updateBoardOne(Board obj);
 
     public int deleteBoardOne(long no);
+
+    public int updatehitBoard(Board obj);
 }

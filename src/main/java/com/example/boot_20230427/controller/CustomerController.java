@@ -13,12 +13,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.boot_20230427.dto.CustomUser;
 import com.example.boot_20230427.dto.Member;
 import com.example.boot_20230427.service.MemberService;
 
@@ -38,23 +40,44 @@ public class CustomerController {
     @Autowired MemberService mService;
 
     @GetMapping(value = "/home.do")
-    public String homeGET() {
+    public String homeGET(
+        Model model,
+        @RequestParam(name = "menu", required = false, defaultValue = "0") int menu,
+        @AuthenticationPrincipal User user
+        ) {
+        if(menu == 1) {
+            // 세션에서 아이디정보를 꺼내서 mapper에서 조회
+            Member member = mService.selectMemberOne1(user.getUsername());
+            model.addAttribute("member", member);
+            log.info(format, member.toString());
+
+            // 체크 박스에 표시할 항목들
+            String[] checkLabel = {"가가가", "가나다","나나나","다다다","가나다"};
+            model.addAttribute("checklabel", checkLabel);
+            log.info(format, checkLabel.toString());
+        }
         return "/customer/home";
     }
+
+    // @AuthenticationPrincipal User user => HttpSession httpSession => httpSession.getAttribute("user")
     @PostMapping(value = "/home.do")
     public String homePOST(
         @RequestParam(name = "menu", defaultValue = "0", required = false) int menu,
         @RequestParam(name = "currentpassword", required = false) String currentpassword,
-        @AuthenticationPrincipal User user,
+        @AuthenticationPrincipal CustomUser user,
         HttpServletRequest request,
         HttpServletResponse response ) {
+            
         log.info(format, menu);
+        log.info(format, user.toString());
 
         if(menu==1) {
-            log.info(format, user.getUsername());
+            log.info(format, user.toString());
 
             if(user.getUsername() != null ) {
                 UserDetails userdetails = uService.loadUserByUsername(user.getUsername());
+                String role = userdetails.getAuthorities().toString();
+                log.info(format, role);
                 Member member = new Member();
                 member.setId(userdetails.getUsername());
                 member.setPassword(userdetails.getPassword());

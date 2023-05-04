@@ -41,7 +41,7 @@ public class HomeController {
     // 403 page 생성
     @GetMapping(value = "/403page.do")
     public String errorpageGET() {
-        return "403page";
+        return "/error/403page";
     }
 
 

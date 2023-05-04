@@ -9,16 +9,28 @@
 <body>
     <h3>고객용 홈화면</h3>
 
-    <a th:href="@{/customer/home.do(menu=1)}">정보수정(이름, 나이)</a> <br/>
-    <a th:href="@{/customer/home.do(menu=2)}">비번변경(암호입력해서 확인후 변경)</a> <br/>
-    <a th:href="@{/customer/home.do(menu=3)}">회원탈퇴(삭제, 로그아웃(GET이 아닌 POST라 힘들듯?))</a>
+    <a th:href="@{/customer/home.do(menu=1)}">정보수정</a> <br/>
+    <a th:href="@{/customer/home.do(menu=2)}">비번변경</a> <br/>
+    <a th:href="@{/customer/home.do(menu=3)}">회원탈퇴</a>
     <hr/>
 
     <div th:if="${#strings.equals(param.menu, '1')}">
-        <form th:action="@{/customer/home.do(menu=1)}" method="post">
-            <input type="text" name="name" placeholder="이름" />
-            <input type="number" name="age" placeholder="나이" />
+        <form th:action="@{/customer/home.do(menu=1)}" th:object="${member}" method="post">
+
+            <input type="text" name="name" th:field="${member.name}" placeholder="이름" />
+
+            <select th:field="${member.age}">
+                <!--<option value="전송값">화면에보이는것</option>-->
+                <option th:each="num : ${#numbers.sequence(1,120)}" th:value="${num}" th:text="|나이 ${num}|" />
+            </select>
+
             <input type="submit" value="정보변경"/>
+        </form>
+        <hr/>
+        <form th:object="${member}">
+            <input type="checkbox" th:each="tmp : ${checklabel}" th:text="${tmp}" th:value="${tmp}" th:field="${member.name}"/>
+            <hr/>
+            <input type="radio" th:each="tmp : ${checklabel}" th:text="${tmp}" th:value="${tmp}" th:field="${member.name}"/>
         </form>
     </div>
 

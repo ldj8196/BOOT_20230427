@@ -47,3 +47,18 @@
 ## 2023.05.03
   - Spring Boot SecurityFilterChain
     - 고객, 판매자, 관리자 권한을 이용하여 SecurityFilter 학습
+    - 각 권한 login, logout 통일 및 handler 사용
+    - 권한 별 로그인 및 Filter 확인
+  
+<img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/20230503.png" width="300">
+
+## 2023.05.04
+  - Spring Boot inheritance dto create
+    - UserDetailsService 상속받은 User를 다시 CustomUser 클래스에 상속
+    - User안에 있는 값 보다 더 필요한 값들을 등록하여 Session에 저장
+    - 상속을 사용하여 세션에 더 많은 정보를 저장할 수 있다
+
+  - Spring Boot Restful api 연동(RestController) practice
+    - RestController GET을 이용한 게시판 조회
+    - RestController POST를 이용한 게시판 글쓰기(추가)
+    - SecurityConfig 에서 POST를 전송하기위해 /api 주소로 시작하는 모든 url에 csrf를 무시
