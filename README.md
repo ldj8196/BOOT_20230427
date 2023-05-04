@@ -61,7 +61,8 @@
   - Spring Boot Restful api 연동(RestController) practice
     - RestController GET을 이용한 게시판 조회
     - RestController POST를 이용한 게시판 글쓰기(추가)
-<img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/restboardinsert.png" width="300">
     - SecurityConfig 에서 POST를 전송하기위해 /api 주소로 시작하는 모든 url에 csrf를 무시
     - login시 Token 발행
+    
+<img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/restboardinsert.png" width="300">
 <img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/token.png" width="300">
