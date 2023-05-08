@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Document</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <h3>회원목록</h3>
+    <a th:href="@{/board1/insert.do}">게시글쓰기</a>
+    <form th:action="@{/board1/selectlist.do}" method="get">
+        <input type="text" name="text" placeholder="검색어"/>
+        <input type="hidden" name="page" value="1" />
+        <input type="submit" value="검색" />
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>작성자</th>
+                <th>조회수</th>
+                <th>등록날짜</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="obj : ${list}">
+                <td th:text="${obj.no}"></td>
+                <td><a th:href="@{/board1/selectone.do(no=${obj.no})}" th:text="${obj.title}"></a></td>
+                <td th:text="${obj.content}"></td>
+                <td th:text="${obj.writer}"></td>
+                <td th:text="${obj.hit}"></td>
+                <td th:text="${obj.regdate}"></td>
+                <td>
+                    <a th:href="@{/board1/update.do(id=${obj.no})}">수정</a>
+                    <form th:action="@{/board1/delete.do}" method="post">
+                        <input type="hidden" name="id" th:value="${obj.no}" />
+                        <input type="submit" value="삭제" />
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- <th:block th:each="num : ${#numbers.sequence(1,pages)}">
+        <a th:href="@{/member1/selectlist.do(text=${param.text},page=${num})}" th:text="${num}" style="display:inline-block"></a>
+    </th:block>     -->
+</body>
+</html>

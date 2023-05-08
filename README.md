@@ -68,4 +68,12 @@
 <img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/token.png" width="300">
 
 ## 2023.05.08
-  - Spring Boot
+  - Spring Boot jpa(hibernate) practice
+    - Entity Create(Tabel, Column), Repository Create(Member1)
+    - DB Connection CRUD practice
+
+
+
+## 2023.05.09
+
+
