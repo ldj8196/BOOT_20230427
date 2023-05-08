@@ -71,9 +71,11 @@
   - Spring Boot jpa(hibernate) practice
     - Entity Create(Tabel, Column), Repository Create(Member1)
     - DB Connection CRUD practice
+    - 게시판, 답글쓰기 실습
 
+<img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/reply.png" width="300">
 
 
 ## 2023.05.09
-
+  - Spring Boot jpa(hibernate) practice
 
