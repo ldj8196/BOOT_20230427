@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.boot_20230427.entity.Board1;
 import com.example.boot_20230427.repository.Board1Repository;
@@ -24,6 +25,14 @@ public class Board1Controller {
 
    final String format = "Board1Controller => {}";
    final Board1Repository b1Repository;
+
+    @GetMapping(value = "/selectone.do")
+    public String selectoneGET(@RequestParam(name = "no") long no, Model model) {
+        Board1 board1 = b1Repository.findById(no).orElse(null);
+        log.info(format, board1.toString());
+        model.addAttribute("board1", board1);
+        return "/board1/selectone";
+    }
 
     @GetMapping(value = "/insert.do")
     public String insertGET() {

@@ -18,6 +18,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -44,6 +45,7 @@ public class Board1 {
     @CreationTimestamp
     private Date regdate;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "board1")
     List<Reply1> list = new ArrayList<>();
 
