@@ -42,7 +42,7 @@ public class Board1 {
     private long hit=1;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd-HH:mm:ss")
-    @CreationTimestamp
+    @CreationTimestamp // 추가시에만 날짜 정보 저장
     private Date regdate;
 
     @ToString.Exclude
