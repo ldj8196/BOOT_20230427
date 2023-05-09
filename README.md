@@ -77,5 +77,10 @@
 
 
 ## 2023.05.09
-  - Spring Boot jpa(hibernate) practice
+  - Spring Boot jpa(hibernate) 1:N practice
+    - Entity Create(Address1, Boardimage1), Repository Create(Address1, Boardimage1)
+    - @ManyToOne, @OneToMany 1:N 관계 외래키 조회
+    - board1 Entity와 boardimage1 Entity 관계 설정
+    - board1 값에서 boardimage1 값 조회
 
+<img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/repositoryimage.png" width="300">

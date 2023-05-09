@@ -7,7 +7,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
-    <h3>회원목록</h3>
+    <h3>게시글목록</h3>
     <a th:href="@{/board1/insert.do}">게시글쓰기</a>
     <form th:action="@{/board1/selectlist.do}" method="get">
         <input type="text" name="text" placeholder="검색어"/>
@@ -24,6 +24,7 @@
                 <th>작성자</th>
                 <th>조회수</th>
                 <th>등록날짜</th>
+                <th>버튼</th>
             </tr>
         </thead>
         <tbody>
@@ -41,6 +42,7 @@
                         <input type="submit" value="삭제" />
                     </form>
                 </td>
+                <td><a th:href="@{/boardimage1/selectlist.do(no=${obj.no})}"><button>이미지</button></a></td>
             </tr>
         </tbody>
     </table>
