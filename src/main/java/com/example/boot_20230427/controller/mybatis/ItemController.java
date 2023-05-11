@@ -1,4 +1,4 @@
-package com.example.boot_20230427.controller;
+package com.example.boot_20230427.controller.mybatis;
 
 import java.io.IOException;
 import java.io.InputStream;

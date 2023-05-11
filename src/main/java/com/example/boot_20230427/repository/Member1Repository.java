@@ -9,10 +9,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.boot_20230427.entity.Member1;
+import com.example.boot_20230427.entity.Member1Projection;
 
 // 엔티티, 엔티티의 기본키 타입
 @Repository
 public interface Member1Repository extends JpaRepository<Member1,String>{
+
+    // projection select id, name, age from member1 order by id asc
+    public List<Member1Projection> findAllByOrderByIdAsc(); 
+    
     // => JPQL => select m.* from Member1 m order by m.name desc
     public List<Member1> findAllByOrderByNameDesc();
 

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>식당 등록</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <h3>식당등록</h3>
+    <a th:href="@{restaurant1/selectlist.food}"><button>식당목록</button></a>
+    <hr />
+    <form th:action="@{/restaurant1/insert.food}" method="post">
+       번호 : <input type="text" name="phone" /> <br />
+       식당명 : <input type="text" name="name" /> <br />
+       주소 : <input type="text" name="address" /> <br />
+        <select name="type">
+            <option value="korean">한식</option>
+            <option value="chinese">중식</option>
+            <option value="western">양식</option>
+        </select>
+        <input type="submit" value="식당등록" />
+    </form>
+</body>
+</html>

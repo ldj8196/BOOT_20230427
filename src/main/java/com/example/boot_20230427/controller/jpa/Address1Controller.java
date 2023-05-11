@@ -1,4 +1,4 @@
-package com.example.boot_20230427.controller;
+package com.example.boot_20230427.controller.jpa;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.boot_20230427.entity.Address1;
+import com.example.boot_20230427.entity.Address1Projection;
 import com.example.boot_20230427.entity.Member1;
 import com.example.boot_20230427.repository.Address1Repository;
 import com.example.boot_20230427.repository.Member1Repository;
@@ -31,6 +32,22 @@ public class Address1Controller {
     final String format = "Address1Controller = > {}";
     final Member1Repository m1Repository;
     final Address1Repository a1Repository;
+
+    @GetMapping(value = "/selectlistprojection.do")
+    public String selectlistprojectionGET(Model model) {
+        try {
+            List<Address1Projection> list = a1Repository.findAllByOrderByNoDesc(Address1Projection.class);
+            for(Address1Projection obj : list ) {
+                log.info(format, obj.getAddress() + "," + obj.getNo() + "," + obj.getNoAddress()+ "," + obj.getMember1().getId() + "," + obj.getMember1().getName());
+            }
+            model.addAttribute("list", list);
+            return "/address1/selectlistprojection";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/home.do";
+        }
+    }
+
 
     @GetMapping(value = "/selectlist.do")
     public String selectlistGET(

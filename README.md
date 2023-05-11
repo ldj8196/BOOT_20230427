@@ -84,3 +84,18 @@
     - board1 값에서 boardimage1 값 조회
 
 <img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/repositoryimage.png" width="300">
+
+## 2023.05.10
+  - Spring Boot jpa(hibernate) DB Mapping, VIEW Entity
+    - Entity validate, 게시판 페이지네이션
+    - Create VIEW Entity(Board1View, PurchaseView)
+
+<img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/repositoryimage.png" width="300">
+
+## 2023.05.11
+  - Spring Boot jpa Projection Practice
+    - Member1, Address1 Entity Projection Create
+    - Restaurant1, Menu1 CRUD
+    - Menu1 Insert AND Image 출력
+
+  <img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/menu1.png" width="300">

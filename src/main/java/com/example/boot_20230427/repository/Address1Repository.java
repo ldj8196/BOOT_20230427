@@ -11,6 +11,11 @@ import com.example.boot_20230427.entity.Address1;
 @Repository
 public interface Address1Repository extends JpaRepository<Address1, Long> {
     
+    // 제너릭을 이용한 타입
+    <T> List<T> findAllByOrderByNoDesc(Class<T> type);
+
+    // projection select a.no, a.address, m.id, m.name from address1 a, member1 m order by no desc
+    // List<Address1Projection> findAllByOrderByNoDesc();
     // select ... where address
     List<Address1> findByAddress(String address);
 
