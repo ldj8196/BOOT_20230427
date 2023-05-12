@@ -3,13 +3,12 @@ package com.example.boot_20230427.entity;
 
 import java.util.Date;
 
-
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -44,6 +43,9 @@ public class Member1 {
     @CreationTimestamp
     private Date regdate;
 
+    @ToString.Exclude
+    @OneToOne(mappedBy = "member1", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Memberinfo1 memberinfo1;
     // EAGER => member1조회시 address1을 조인하여 보여줌
     // LAZY => memeber1조회시 address1을 조인하지 않고 address1을 필요할때 조인함 (지연)
     // cascade => member1의 회원을 지우면 자동으로 address1의 관련 주소도 삭제함

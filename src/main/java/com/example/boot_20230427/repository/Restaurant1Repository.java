@@ -7,9 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.boot_20230427.entity.Restaurant1;
+import com.example.boot_20230427.entity.Restaurant1ID;
 
 @Repository
-public interface Restaurant1Repository extends JpaRepository<Restaurant1, String> {
+public interface Restaurant1Repository extends JpaRepository<Restaurant1, Restaurant1ID> {
      // 식당 전체 목록 표시(페이지네이션, 연락처, 이름별, 종류별, 주소별 검색)
      List<Restaurant1> findAllByOrderByNoDesc(Pageable pageable);
      long countBy();

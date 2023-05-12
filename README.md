@@ -99,3 +99,9 @@
     - Menu1 Insert AND Image 출력
 
   <img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/menu1.png" width="300">
+
+## 2023.05.12
+  - Spring Boot jpa OneToOne Practice, Image Projection
+    - Member1, Memberinfo1 Entity Create
+    - 1:1관계 데이터 등록시 데이터가 동시(시간 차 있음)에 들어간다.
+    - Menu1 Image Projection 출력, Update, Delete Practice

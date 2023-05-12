@@ -1,6 +1,7 @@
 package com.example.boot_20230427.controller.jpa;
 
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.boot_20230427.dto.Search;
 import com.example.boot_20230427.entity.Restaurant1;
+import com.example.boot_20230427.entity.Restaurant1ID;
 import com.example.boot_20230427.repository.Restaurant1Repository;
 
 import lombok.RequiredArgsConstructor;
@@ -99,6 +101,18 @@ public class Restaurant1Controller {
             model.addAttribute("pages", (total-1)/PAGETOTAL+1);
             model.addAttribute("search", obj);
             return "/restaurant1/selectlist";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/home.do";
+        }
+    }
+    @PostMapping(value = "/delete.food")
+    public String deletePOST(
+        @ModelAttribute Restaurant1ID obj) {
+        try {
+            log.info(format, obj.toString());
+            r1Repository.deleteById(obj);
+            return "redirect:/restaurant1/selectlist.food";
         } catch (Exception e) {
             e.printStackTrace();
             return "redirect:/home.do";

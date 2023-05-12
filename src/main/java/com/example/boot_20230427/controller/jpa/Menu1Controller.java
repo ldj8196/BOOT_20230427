@@ -3,7 +3,6 @@ package com.example.boot_20230427.controller.jpa;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,10 +24,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.boot_20230427.entity.Menu1;
+import com.example.boot_20230427.entity.Menu1ImageProjection;
 import com.example.boot_20230427.repository.Menu1Repository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 @RequestMapping(value = "/menu1")
@@ -40,11 +42,13 @@ public class Menu1Controller {
     final Menu1Repository m1Repository;
     @Autowired ResourceLoader resourceLoader; // resources폴더의 파일을 읽기 위한 객체 생성
     @Value("${default.image}") String defaultImage;
-    // 이미지 한개 출력
+
+    // 이미지 한개 출력 이미지는 DB에서 꺼내서 url형태로 변경시켜야함.
+    // 127.0.0.1:9090/ROOT/menu1/image?no=1
+    // <img src="/ROOT/menu1/image?no=1"/>
     @GetMapping(value = "/image")
     public ResponseEntity<byte[]> image(@RequestParam(name = "no", defaultValue = "0") long no) throws IOException {
-
-        Menu1 obj = m1Repository.findById(BigInteger.valueOf(no)).orElse(null);
+        Menu1ImageProjection obj = m1Repository.findByNo(BigInteger.valueOf(no));
         HttpHeaders headers = new HttpHeaders(); // import org.springframework.http.HttpHeaders;
 
         if(obj != null){ // 이미지 존재 확인
@@ -60,6 +64,7 @@ public class Menu1Controller {
         headers.setContentType(MediaType.IMAGE_JPEG);
         return new ResponseEntity<byte[]>(is.readAllBytes(), headers, HttpStatus.OK);
     }
+
     @GetMapping(value = "/insert.food")
     public String insertGET(
         Model model,
@@ -68,15 +73,7 @@ public class Menu1Controller {
         @RequestParam(name = "rphone") String rphone) {
         try {
             List<Menu1> list = m1Repository.findByRestaurant1_no(BigInteger.valueOf(rno));
-            // 전체 이미지
-            List<String> imageList = new ArrayList<>();
-            List<Menu1> list1 = m1Repository.findByRestaurant1_noOrderByNoAsc(BigInteger.valueOf(rno));
-            if(!list1.isEmpty()) {
-                for(Menu1 menu1 : list1) {
-                    imageList.add(request.getContextPath()+"/menu1/image?no="+menu1.getNo());
-                }
-            }
-            model.addAttribute("imageList", imageList);
+            
             model.addAttribute("list", list);
             model.addAttribute("rphone", rphone);
             model.addAttribute("rno", rno);
@@ -104,4 +101,59 @@ public class Menu1Controller {
             return "redirect:/home.do";
         }
     }
+    @PostMapping(value = "/delete.food")
+    public String deletePOST(
+        @RequestParam(name = "no") long no,
+        @RequestParam(name = "rno") long rno,
+        @RequestParam(name = "rphone") String rphone) {
+        try {
+            log.info(format, no);
+            log.info(format, rphone);
+            log.info(format, rno);
+            m1Repository.deleteById(BigInteger.valueOf(no));
+            return "redirect:/menu1/insert.food?rno="+rno+"&rphone="+rphone;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/home.do";
+        }
+    }
+    @GetMapping(value = "/update.food")
+    public String updateGET(
+        Model model,
+        @RequestParam(name = "no") long no,
+        @RequestParam(name = "rno") long rno,
+        @RequestParam(name = "rphone") String rphone
+    ) {
+        try {
+            Menu1 obj =m1Repository.findById(BigInteger.valueOf(no)).orElse(null);
+            model.addAttribute("obj", obj);
+            model.addAttribute("rno", rno);
+            model.addAttribute("rphone", rphone);
+            return "/menu1/update";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/home.do";
+        }
+    }
+
+    @PostMapping(value="/update.food")
+    public String updatePOST(
+        @ModelAttribute Menu1 menu,
+        @RequestParam(name ="image") MultipartFile file
+    ) {
+        try {
+            log.info(format, menu.toString());
+            menu.setImagesize(BigInteger.valueOf(file.getSize()));
+            menu.setImagedata(file.getInputStream().readAllBytes());
+            menu.setImagetype(file.getContentType());
+            menu.setImagename(file.getOriginalFilename());
+            log.info(format, menu.toString());
+            m1Repository.save(menu);
+            return "redirect:/menu1/insert.food?rno="+menu.getRestaurant1().getNo()+"&rphone="+menu.getRestaurant1().getPhone();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/home.do";
+        }
+    }
+    
 }

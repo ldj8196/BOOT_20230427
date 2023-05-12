@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.boot_20230427.entity.Member1;
 import com.example.boot_20230427.entity.Member1Projection;
+import com.example.boot_20230427.entity.Memberinfo1;
 import com.example.boot_20230427.repository.Member1Repository;
 
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,37 @@ public class Member1Controller {
 
     final String format = "Member1Controller => {}";
     final Member1Repository m1Repository; // 저장소 객체
+
+    // one to one
+    @GetMapping(value = "/join1.do")
+    public String join1GET() {
+        try {
+
+            return "/member1/join1";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/home.do";
+        }
+    }
+    @PostMapping(value = "/join1.do")
+    public String join1POST(
+        @ModelAttribute Member1 member1,
+        @ModelAttribute Memberinfo1 memberinfo1) {
+        try {
+            log.info(format, memberinfo1);
+            log.info(format, member1);
+            member1.setMemberinfo1(memberinfo1);
+            memberinfo1.setMember1(member1);
+            log.info(format, memberinfo1);
+            log.info(format, member1);
+
+            m1Repository.save(member1);
+            return "redirect:/member1/join1.do";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/home.do";
+        }
+    }
 
     @GetMapping(value = "/selectlistprojection.do")
     public String selectlistprojectionGET(Model model) {

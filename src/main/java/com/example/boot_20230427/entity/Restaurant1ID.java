@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestaurantID implements Serializable {
+public class Restaurant1ID implements Serializable {
     private BigInteger no;
     private String phone;
 }

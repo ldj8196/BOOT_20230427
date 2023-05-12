@@ -17,11 +17,15 @@
     <h3>현재등록된 메뉴목록</h3>
     <table>
         <tbody>
-            <tr th:each="obj,i:${list}">
+            <tr th:each="obj:${list}">
+                <td> <img th:src="@{/menu1/image(no=${obj.no})}" style="width:50px;height:50px;"/> </td>
                 <td th:text="${obj.no}"></td>
                 <td th:text="${obj.name}"></td>
                 <td th:text="${obj.price}"></td>
-                <td> <img th:src="${imageList[i.index]}" style="width:50px;height:50px;"/> </td>
+                <td>
+                    <a th:href="@{/menu1/update.food(no=${obj.no}, rno=${rno}, rphone=${rphone})}"><button>수정</button></a>
+                    <button th:onclick="deleteAction([[${obj.no}]])">삭제</button>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -36,5 +40,32 @@
         메뉴사진 : <input type="file" name="image"/> <br />
         <input type="submit" value="메뉴등록"/>
     </form>
+
+    <form th:action="@{/menu1/delete.food}" method="post" id="form2" style="display: none;">
+        <input type="hidden" name="no" id="hidden_no"/>
+        <input type="hidden" name="rno" th:value="${rno}" />
+        <input type="hidden" name="rphone" th:value="${rphone}" />
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script th:inline="javascript">
+        function deleteAction(no) {
+            Swal.fire({
+                title: '메뉴를 삭제하시겠습니까???',
+                text: "삭제하시면 다시 복구시킬 수 없습니다.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '삭제',
+                cancelButtonText: '취소'
+                }).then((result) => {
+                if (result.value) {
+                     //"삭제" 버튼을 눌렀을 때 작업할 내용을 이곳에 넣어주면 된다.
+                    document.getElementById('hidden_no').value = no;
+                    document.getElementById('form2').submit();
+                }
+             })
+        }
+    </script>
 </body>
 </html>
