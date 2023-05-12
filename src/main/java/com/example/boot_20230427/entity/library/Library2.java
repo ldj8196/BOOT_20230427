@@ -1,13 +1,17 @@
 package com.example.boot_20230427.entity.library;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -15,6 +19,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -37,4 +42,11 @@ public class Library2 {
     @Column(updatable = false)
     private Date regdate;
 
+    @ToString.Exclude
+    @OneToMany(mappedBy ="library2", cascade = CascadeType.REMOVE )
+    List<Book2> book2 = new ArrayList<>();
+
+    @ToString.Exclude
+    @OneToMany(mappedBy ="library2", cascade = CascadeType.REMOVE )
+    List<Admin2> admin2 = new ArrayList<>();
 }
