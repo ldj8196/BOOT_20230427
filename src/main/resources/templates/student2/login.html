@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Document</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <h3>LOGIN</h3>
+    <form th:action="@{/student2/login.do}" method="post">
+        email:<input type="text" name="email" value="a@a" /> <br/>
+        pw:<input type="text" name="password" value="a" /> <br/>
+        <input type="submit" value="로그인" />
+    </form>    
+</body>
+</html>

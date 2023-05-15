@@ -105,3 +105,9 @@
     - Member1, Memberinfo1 Entity Create
     - 1:1관계 데이터 등록시 데이터가 동시(시간 차 있음)에 들어간다.
     - Menu1 Image Projection 출력, Update, Delete Practice
+
+## 2023.05.15
+  - Spring Boot jpa Practice
+    - 도서관 시스템 jpa 실습
+    - REST, jpa 이용
+    - 도서관 추가 및 목록 조회 RestController 사용
