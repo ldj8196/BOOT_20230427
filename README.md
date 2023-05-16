@@ -111,3 +111,9 @@
     - 도서관 시스템 jpa 실습
     - REST, jpa 이용
     - 도서관 추가 및 목록 조회 RestController 사용
+
+## 2023.05.16
+  - Spring Boot Token 발급
+    - Security Filter 이용 Login, Logout 처리
+    - Login시 Token 발행
+    - Token 발행 및 Token 검증 Component 생성

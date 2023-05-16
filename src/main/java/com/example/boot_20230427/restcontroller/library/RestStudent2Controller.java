@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,9 +24,66 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class RestStudent2Controller {
+
     final String format = "RestStudent2Controller => {}";
     BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
+    final JwUtil2 jwUtil2; // 컴포넌트 객체 생성
     @Autowired Student2Repository s2Repository;
+
+    // 회원탈퇴, 비밀번호변경, 회원정보수정 ... 로그인이 되어야 되는 모든것.
+    // 회원정보수정 => 토큰을 주세요. 검증해서 성공하면 정보수정을 진행
+    @PostMapping(value = "/update.json")
+    public Map<String, Object> updatePOST(@RequestBody Student2 student2, @RequestHeader(name = "token") String token) {
+        Map<String, Object> retMap = new HashMap<>();
+
+        try {
+            // 1. 토큰을 받아서 출력
+            log.info(format, token);
+
+            // 2. 실패시 전달값
+            retMap.put("status", 0);
+            // 2. 토큰을 검증
+            if( jwUtil2.checkJwt(token) == true) {
+                // 3. 정보를 수정함.
+                retMap.put("status", 200);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            retMap.put("status", -1);
+            retMap.put("error", e.getMessage());
+        }
+        return retMap;
+    }
+
+    @PostMapping(value = "/login.json")
+    public Map<String, Object> loginPOST(@RequestBody Student2 student2) {
+    Map<String, Object> retMap = new HashMap<>();
+
+        try {
+            // 1. 이메일, 암호 전송 확인
+            log.info(format, student2.toString());
+
+            // 2. 이메일을 이용해서 정보를 가져옴.
+            Student2 retStudent2 = s2Repository.findById(student2.getEmail()).orElse(null);
+            
+            // 3. 실패시 전송할 데이터
+            retMap.put("status", 0);
+
+            // 4. 암호가 일치하는 지 확인 => 전송된 hash되지 않은 암호와 DB에 해시된 암호 일치 확인
+            if( bcpe.matches(student2.getPassword(), retStudent2.getPassword())) {
+                retMap.put("status", 200);
+                retMap.put("token", jwUtil2.createJwt(retStudent2.getEmail(), retStudent2.getName()));
+            }
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+            retMap.put("status", -1);
+            retMap.put("error", e.getMessage());
+        }
+
+        return retMap;
+    }
 
     // 이메일 중복확인용
     @GetMapping(value = "/emailcheck.json")

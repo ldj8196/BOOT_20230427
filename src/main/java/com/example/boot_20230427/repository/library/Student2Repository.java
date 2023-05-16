@@ -12,4 +12,5 @@ public interface Student2Repository extends JpaRepository<Student2,String> {
     long countByEmail(String email);
 
     Student2Projection findByEmail(String email);
+    
 }

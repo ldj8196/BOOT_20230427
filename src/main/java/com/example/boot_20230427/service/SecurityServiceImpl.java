@@ -2,6 +2,7 @@ package com.example.boot_20230427.service;
 
 import java.util.Collection;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -17,9 +18,9 @@ import com.example.boot_20230427.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-// 인터페이스와 상속
+// 인터페이스와 상속 멤버와 연동
 
-@Service
+@Service @Primary
 @Slf4j
 @RequiredArgsConstructor
 public class SecurityServiceImpl implements UserDetailsService {

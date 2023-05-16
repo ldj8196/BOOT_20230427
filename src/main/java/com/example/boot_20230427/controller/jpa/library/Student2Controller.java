@@ -1,10 +1,12 @@
 package com.example.boot_20230427.controller.jpa.library;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +29,18 @@ public class Student2Controller {
     final String format = "Student2Controller => {}";
     BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 
+    
+
+    @GetMapping(value = "/home.do")
+    public String homeGET(@AuthenticationPrincipal User user, Model model) {
+        try {
+            model.addAttribute("user", user);
+            return "/student2/home";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/student2/login.do";
+        }
+    }
 
     @GetMapping(value = "/login.do")
     public String loginGET() {
@@ -34,21 +48,6 @@ public class Student2Controller {
             return "/student2/login";
         } catch (Exception e) {
             return "redirect:/home.do";
-        }
-    }
-
-    @PostMapping(value = "/login.do")
-    public String loginPOST(@ModelAttribute Student2 obj) {
-        try {
-            // log.info(format, obj);
-            // Student2 s2 = s2Repository.findByemail(format);
-            // if(bcpe.matches(obj.getPassword(), s2.getPassword())) {
-            //     return "redirect:/home.do";
-            // }
-            return "redirect:/student2/login.do";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "redirect:/student2/login.do";
         }
     }
 
