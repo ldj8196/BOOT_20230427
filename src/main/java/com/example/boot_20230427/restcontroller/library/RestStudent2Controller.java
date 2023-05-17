@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -33,18 +34,31 @@ public class RestStudent2Controller {
     // 회원탈퇴, 비밀번호변경, 회원정보수정 ... 로그인이 되어야 되는 모든것.
     // 회원정보수정 => 토큰을 주세요. 검증해서 성공하면 정보수정을 진행
     @PostMapping(value = "/update.json")
-    public Map<String, Object> updatePOST(@RequestBody Student2 student2, @RequestHeader(name = "token") String token) {
+    public Map<String, Object> updatePOST(
+        @RequestBody Student2 obj, 
+        @RequestHeader(name = "token") String token) {
+
         Map<String, Object> retMap = new HashMap<>();
 
         try {
             // 1. 토큰을 받아서 출력
             log.info(format, token);
+            log.info(format, obj.toString());
 
             // 2. 실패시 전달값
             retMap.put("status", 0);
+
             // 2. 토큰을 검증
-            if( jwUtil2.checkJwt(token) == true) {
-                // 3. 정보를 수정함.
+            Student2 obj1 = jwUtil2.checkJwt(token);
+            if( obj1 != null) {
+                // 1. 이메일을 이용해서 기존 데이터 가져오기
+                Student2 obj2 =s2Repository.findById(obj1.getEmail()).orElse(obj1);
+                // 2. obj2에 필요한 정보 저장하기
+                obj2.setName(obj.getName());
+                obj2.setPhone(obj.getPhone());
+                // 3. obj2를 다시 저장하기
+                s2Repository.save(obj2);
+
                 retMap.put("status", 200);
             }
         } catch (Exception e) {

@@ -117,3 +117,11 @@
     - Security Filter 이용 Login, Logout 처리
     - Login시 Token 발행
     - Token 발행 및 Token 검증 Component 생성
+
+<img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/tokenpublication.png" width="300">
+<img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/tokencheck.png" width="300">
+
+## 2023.05.17
+  - Spring Boot Filter Practice
+    - 토큰 발행 유무 필터 구현
+    - 이전 페이지의 URL 저장 필터 구현

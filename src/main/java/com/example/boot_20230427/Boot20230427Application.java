@@ -18,7 +18,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 							   "com.example.boot_20230427.controller.mybatis",
 							   "com.example.boot_20230427.service",
 							   "com.example.boot_20230427.config",
-							   "com.example.boot_20230427.restcontroller"}) // 컨트롤러, 서비스 위치, 시큐리티 환경설정 
+							   "com.example.boot_20230427.restcontroller",
+							   "com.example.boot_20230427.filter"}) // 컨트롤러, 서비스 위치, 시큐리티 환경설정 
 @EntityScan(basePackages = {"com.example.boot_20230427.entity"}) // 엔티티 위치
 @EnableJpaRepositories(basePackages = {"com.example.boot_20230427.repository"}) // 저장소 위치
 public class Boot20230427Application {
