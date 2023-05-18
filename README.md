@@ -125,3 +125,10 @@
   - Spring Boot Filter Practice
     - 토큰 발행 유무 필터 구현
     - 이전 페이지의 URL 저장 필터 구현
+
+## 2023.05.18
+  - Spring Boot SSE
+    - Rest subscribe, publish 구현
+    - 서버 정상 구동 확인을 위한 chatting 만들기
+
+<img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/chat.png" width="300">
