@@ -22,7 +22,7 @@
         eventSource.onopen = (e) => {
             console.log('onopen',e);
         }
-        // callback2
+        // callback2 메세지 받기
         eventSource.onmessage = (e) => {
             const div = document.querySelector('#messages');
             div.innerHTML = `${e.data}<br />` + div.innerHTML;
@@ -32,7 +32,7 @@
         eventSource.onerror = (e) => {
             console.log('onerror',e);
         }
-
+        // 메시지 보내기
         const sendMessage =  () => {
             const msg = document.querySelector('#input').value;
             fetch(`/ROOT/api/sse/publish?message=${msg}`); // 메시지 보내기
