@@ -21,7 +21,7 @@ public class MyScheduler {
 
     // 초 분 시간 일 월 요일
     // */5 * * * * * 5초 간격으로 동작
-    @Scheduled(cron = "*/5 * * * * *")
+    // @Scheduled(cron = "*/5 * * * * *")
     public void printDate() {
         log.info("{}", new Date().toString());
 

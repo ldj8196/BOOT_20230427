@@ -132,3 +132,12 @@
     - 서버 정상 구동 확인을 위한 chatting 만들기
 
 <img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/chat.png" width="300">
+
+## 2023.05.19
+  - Spring Boot Interceptor, AOP Practice
+    - Interceptor 구현
+    - Interceptor란 controller 실행 전 후를 필터하는 기능
+    - AOP 구현
+    - AOP는 개발자가 작성한 특정 메소드에서만 반응
+
+<img src="https://raw.githubusercontent.com/ldj8196/boot_20230427/main/src/main/studyimage/aop.png" width="300">
